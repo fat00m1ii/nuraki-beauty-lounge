@@ -88,12 +88,11 @@ export default function HeroScene() {
           className={`hero-cine absolute inset-0 h-full w-full object-cover ${
             reduce ? '' : 'scale-125 opacity-0'
           }`}
-          src={videos.lounge1}
+          src={videos.hero}
           autoPlay
           muted
           loop
           playsInline
-          poster={img(gallery[0].path, { w: 1200 })}
           data-higgsfield-slot="hero"
         />
 

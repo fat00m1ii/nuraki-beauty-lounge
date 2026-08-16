@@ -14,9 +14,8 @@ export const site = {
   phone: '+971 52 760 5358',
   phoneRaw: '+971527605358',
   whatsapp: 'https://wa.me/971527605358',
-  // TODO: confirm the real Instagram handle/URL
-  instagram: 'https://www.instagram.com/nuraki.beautylounge/',
-  instagramHandle: '@nuraki.beautylounge',
+  instagram: 'https://www.instagram.com/nuraki.ae/',
+  instagramHandle: '@nuraki.ae',
   address: {
     line1: "21 Al Infitah St (Linfitah)",
     line2: "Al Sa'adah — Zone 1, Abu Dhabi, UAE",
@@ -145,6 +144,7 @@ export const galleryFeatured = [
 ].map((f) => ({ path: `gallery/${f}.jpg`, alt: 'NURAKI nail art' }))
 
 export const videos = {
+  hero: 'video/hero-liquid-gold.mp4', // Higgsfield-generated liquid gold & burgundy
   lounge1: 'video/lounge-1.mp4',
   lounge2: 'video/lounge-2.mp4',
 }

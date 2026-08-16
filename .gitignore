@@ -25,3 +25,5 @@ yarn-error.log*
 
 # raw originals (served via ImageKit / optimized copies live in public/)
 _source_assets
+.vercel
+.env*
