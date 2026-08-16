@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { site, videos, gallery } from '../data.js'
-import { img } from '../lib/imagekit.js'
+import { img, assetUrl } from '../lib/imagekit.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -88,7 +88,7 @@ export default function HeroScene() {
           className={`hero-cine absolute inset-0 h-full w-full object-cover ${
             reduce ? '' : 'scale-125 opacity-0'
           }`}
-          src={videos.hero}
+          src={assetUrl(videos.hero)}
           autoPlay
           muted
           loop

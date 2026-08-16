@@ -1,5 +1,5 @@
 import { pillars, videos, gallery } from '../data.js'
-import { img } from '../lib/imagekit.js'
+import { img, assetUrl } from '../lib/imagekit.js'
 import SmartImage from './SmartImage.jsx'
 
 export default function Experience() {
@@ -12,7 +12,7 @@ export default function Experience() {
             <div className="overflow-hidden rounded-3xl ring-1 ring-gold/15 shadow-2xl">
               <video
                 className="aspect-[4/5] w-full object-cover"
-                src={videos.lounge2}
+                src={assetUrl(videos.lounge2)}
                 autoPlay
                 muted
                 loop

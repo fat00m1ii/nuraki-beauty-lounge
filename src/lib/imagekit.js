@@ -17,8 +17,9 @@ export function img(path, opts = {}) {
   const clean = String(path).replace(/^\//, '')
 
   if (!ENDPOINT) {
-    // Local fallback — ignores transforms, just serves the file from /public.
-    return `/${clean}`
+    // Local fallback — serves the file from /public, respecting the deploy
+    // base path (BASE_URL is '/' on Vercel, '/nuraki-beauty-lounge/' on Pages).
+    return `${import.meta.env.BASE_URL}${clean}`
   }
 
   const tr = []
@@ -39,3 +40,9 @@ export function lqip(path) {
 }
 
 export const imagekitReady = Boolean(ENDPOINT)
+
+/** Base-aware URL for a local asset (e.g. videos) that isn't image-transformed. */
+export function assetUrl(path) {
+  const clean = String(path).replace(/^\//, '')
+  return `${import.meta.env.BASE_URL}${clean}`
+}
