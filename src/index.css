@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-ink text-cream-dim font-sans antialiased;
+    margin: 0;
+    overflow-x: hidden;
+    font-feature-settings: 'liga' 1, 'kern' 1;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif text-cream;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: theme('colors.gold');
+    color: theme('colors.ink');
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.ink');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.mocha');
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.gold');
+  }
+}
+
+@layer components {
+  /* Section eyebrow label */
+  .eyebrow {
+    @apply text-gold uppercase text-xs tracking-label font-sans;
+  }
+
+  /* Thin gold hairline divider */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      theme('colors.gold') 50%,
+      transparent
+    );
+    opacity: 0.5;
+  }
+
+  /* Primary gold button */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full
+      bg-gold px-8 py-3.5 text-ink font-medium tracking-wide2 uppercase text-xs
+      transition-all duration-500 ease-lux;
+    box-shadow: 0 10px 40px -12px rgba(201, 162, 75, 0.6);
+  }
+  .btn-gold:hover {
+    @apply bg-gold-soft;
+    transform: translateY(-2px);
+  }
+
+  /* Ghost / outline button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full
+      border border-taupe/40 px-8 py-3.5 text-cream font-medium
+      tracking-wide2 uppercase text-xs transition-all duration-500 ease-lux;
+  }
+  .btn-ghost:hover {
+    @apply border-gold text-gold;
+  }
+
+  /* Gold gradient text for accents */
+  .text-shimmer {
+    background: linear-gradient(
+      100deg,
+      theme('colors.gold') 0%,
+      theme('colors.gold-soft') 30%,
+      theme('colors.cream') 50%,
+      theme('colors.gold-soft') 70%,
+      theme('colors.gold') 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    @apply animate-shimmer;
+  }
+}
+
+@layer utilities {
+  /* Scroll-reveal — used by useReveal() */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Fine noise/grain veil for that filmic luxe finish */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* DomeGallery scroll lock (from React Bits component) */
+body.dg-scroll-lock {
+  overflow: hidden;
+  touch-action: none;
+}
