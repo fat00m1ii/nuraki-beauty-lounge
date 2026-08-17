@@ -78,7 +78,7 @@ export default function Visit() {
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=24.4924,54.3705&z=14&hl=en&output=embed"
+              src="https://www.google.com/maps?q=Shams+Boutik,+Al+Reem+Island,+Abu+Dhabi&z=16&hl=en&output=embed"
             />
           </div>
         </div>

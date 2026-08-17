@@ -17,10 +17,10 @@ export const site = {
   instagram: 'https://www.instagram.com/nuraki.ae/',
   instagramHandle: '@nuraki.ae',
   address: {
-    line1: "21 Al Infitah St (Linfitah)",
-    line2: "Al Sa'adah — Zone 1, Abu Dhabi, UAE",
+    line1: 'Shams Boutik, Level 1',
+    line2: 'Al Reem Island — The Gate District, Abu Dhabi, UAE',
     mapUrl:
-      'https://www.google.com/maps/search/?api=1&query=NURAKI+Beauty+Lounge+Al+Saadah+Abu+Dhabi',
+      'https://www.google.com/maps/search/?api=1&query=NURAKI+Beauty+Lounge+Shams+Boutik+Al+Reem+Island+Abu+Dhabi',
   },
   hours: {
     label: 'Open daily · 10:00 AM – 8:00 PM',

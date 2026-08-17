@@ -9,49 +9,31 @@ export default function SideNav() {
   const activeRef = useRef(0)
 
   useEffect(() => {
-    // Scroll-position spy: the active item is the last section whose top has
-    // crossed a reference line 35% down the viewport. At the very bottom of the
-    // page (footer) we force the final section so it never sticks on a
-    // mid-page item like "Experience".
-    let lastRun = 0
+    const sections = nav
+      .map((n) => document.getElementById(n.id))
+      .filter(Boolean)
+    if (!sections.length) return
 
-    const compute = () => {
-      const sections = nav
-        .map((n) => document.getElementById(n.id))
-        .filter(Boolean)
-      if (!sections.length) return
+    // A zero-height line across the viewport middle: exactly one section
+    // straddles it at any moment, so the highlight always matches what's on
+    // screen. We only ever move the highlight onto an intersecting section
+    // (never reset it), so past the last section the footer keeps "Book" lit.
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          const idx = nav.findIndex((n) => n.id === entry.target.id)
+          if (idx !== -1 && idx !== activeRef.current) {
+            activeRef.current = idx
+            setActive(idx)
+          }
+        })
+      },
+      { rootMargin: '-50% 0px -50% 0px', threshold: 0 }
+    )
 
-      const line = window.innerHeight * 0.35
-      let idx = 0
-      for (let i = 0; i < sections.length; i++) {
-        if (sections[i].getBoundingClientRect().top - line <= 0) idx = i
-      }
-
-      const atBottom =
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 4
-      if (atBottom) idx = sections.length - 1
-
-      if (idx !== activeRef.current) {
-        activeRef.current = idx
-        setActive(idx)
-      }
-    }
-
-    const onScroll = () => {
-      const now = performance.now()
-      if (now - lastRun < 80) return
-      lastRun = now
-      compute()
-    }
-
-    compute()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
+    sections.forEach((s) => io.observe(s))
+    return () => io.disconnect()
   }, [])
 
   const goTo = (index) => {
@@ -60,7 +42,7 @@ export default function SideNav() {
   }
 
   return (
-    <div className="pointer-events-none fixed left-6 top-1/2 z-30 hidden -translate-y-1/2 lg:block">
+    <div className="pointer-events-none fixed left-6 top-1/2 z-50 hidden -translate-y-1/2 lg:block">
       <div className="pointer-events-auto rounded-2xl bg-ink/25 px-4 py-5 ring-1 ring-white/5 backdrop-blur-[3px]">
         <LineSidebar
           key={active}

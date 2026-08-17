@@ -84,18 +84,36 @@ export default function HeroScene() {
         ref={stageRef}
         className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-ink"
       >
-        {/* Cinematic base layer — Higgsfield hero slot.
-            Swap this <video> src for the approved Higgsfield lounge fly-through. */}
+        {/* Static poster still — always painted so the hero is never black,
+            even while the video buffers or if GitHub Pages 503s the mp4. */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-ink bg-cover bg-center"
+          style={{ backgroundImage: `url(${assetUrl('video/hero-poster.webp')})` }}
+          aria-hidden="true"
+        />
+
+        {/* Cinematic base layer — Higgsfield liquid-gold hero. */}
         <video
           className={`hero-cine absolute inset-0 h-full w-full object-cover ${
             reduce ? '' : 'scale-125 opacity-0'
           }`}
           src={assetUrl(videos.hero)}
+          poster={assetUrl('video/hero-poster.webp')}
           autoPlay
           muted
           loop
           playsInline
+          preload="metadata"
           data-higgsfield-slot="hero"
+          onError={(e) => {
+            // Transient GitHub Pages 503s on the mp4 — retry once, cache-busted.
+            const v = e.currentTarget
+            if (!v.dataset.retried) {
+              v.dataset.retried = '1'
+              v.src = `${assetUrl(videos.hero)}?r=${Date.now()}`
+              v.load()
+            }
+          }}
         />
 
         {/* Warm gradient + dark veil for depth and legibility */}
@@ -128,7 +146,7 @@ export default function HeroScene() {
                   key={i}
                   className={`hero-shot ${tag} absolute ${pos} aspect-[3/4] overflow-hidden rounded-2xl opacity-0 shadow-2xl ring-1 ring-gold/20`}
                 >
-                  <img src={img(shot.path, { w: 500 })} alt="" className="h-full w-full object-cover" />
+                  <img src={img(shot.path, { w: 500 })} alt={shot.alt} className="h-full w-full object-cover" />
                 </div>
               )
             })}
