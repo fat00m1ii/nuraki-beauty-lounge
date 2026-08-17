@@ -11,7 +11,7 @@ const domeImages = galleryFeatured.map((g) => ({
 export default function GallerySection() {
   return (
     <section id="gallery" className="relative z-10 bg-ink">
-      <div className="px-5 pt-24 text-center sm:px-8 sm:pt-32">
+      <div className="px-5 pt-24 text-center sm:px-8 sm:pt-32 lg:pl-[210px]">
         <div className="reveal mx-auto max-w-shell">
           <p className="eyebrow">The Portfolio</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-6xl">A Gallery in the Round</h2>

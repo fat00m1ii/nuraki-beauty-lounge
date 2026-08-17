@@ -4,7 +4,7 @@ import SmartImage from './SmartImage.jsx'
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative z-10 overflow-hidden bg-ink-soft px-5 py-24 sm:px-8 sm:py-32">
+    <section id="experience" className="relative z-10 overflow-hidden bg-ink-soft px-5 py-24 sm:px-8 sm:py-32 lg:pl-[210px]">
       <div className="mx-auto max-w-shell">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           {/* Video + framed image */}

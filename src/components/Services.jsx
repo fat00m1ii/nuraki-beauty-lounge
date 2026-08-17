@@ -2,7 +2,7 @@ import { services } from '../data.js'
 
 export default function Services() {
   return (
-    <section id="services" className="relative z-10 bg-ink px-5 py-24 sm:px-8 sm:py-32">
+    <section id="services" className="relative z-10 bg-ink px-5 py-24 sm:px-8 sm:py-32 lg:pl-[210px]">
       <div className="mx-auto max-w-shell">
         <div className="reveal mb-16 text-center">
           <p className="eyebrow">The Menu</p>

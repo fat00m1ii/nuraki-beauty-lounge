@@ -13,7 +13,7 @@ export default function Visit() {
   const open = useOpenNow()
 
   return (
-    <section id="visit" className="relative z-10 bg-ink px-5 py-24 sm:px-8 sm:py-32">
+    <section id="visit" className="relative z-10 bg-ink px-5 py-24 sm:px-8 sm:py-32 lg:pl-[210px]">
       <div className="mx-auto max-w-shell">
         <div className="grid gap-14 lg:grid-cols-2">
           <div className="reveal">
@@ -68,14 +68,17 @@ export default function Visit() {
             </div>
           </div>
 
-          {/* Map */}
+          {/* Map — keyless Google Maps embed centred on the street/area.
+              (The business-name query returned no result → blank blue tile.) */}
           <div className="reveal overflow-hidden rounded-3xl ring-1 ring-gold/15 shadow-2xl">
             <iframe
               title="NURAKI Beauty Lounge location"
-              className="h-full min-h-[380px] w-full grayscale-[0.3] contrast-[1.1]"
+              className="block h-full min-h-[340px] w-full grayscale-[0.25] contrast-[1.05]"
+              style={{ border: 0 }}
               loading="lazy"
+              allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=NURAKI%20Beauty%20Lounge%20Al%20Saadah%20Abu%20Dhabi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              src="https://www.google.com/maps?q=24.4924,54.3705&z=14&hl=en&output=embed"
             />
           </div>
         </div>

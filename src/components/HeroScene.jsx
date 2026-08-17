@@ -32,7 +32,7 @@ export default function HeroScene() {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: '+=3200',
+          end: '+=4000',
           scrub: 1,
           pin: stageRef.current,
           pinSpacing: true,
@@ -46,31 +46,33 @@ export default function HeroScene() {
         .to('.hero-veil', { opacity: 0.55, duration: 1.2 }, 0)
         .to('.hero-cue', { opacity: 0, duration: 0.4 }, 0)
 
-      // 2 — Glide inward: wordmark lifts, first line, photos drift in
-      tl.to('.hero-word', { yPercent: -120, scale: 0.6, opacity: 0.9, duration: 1.4 }, 1)
-        .to('.hero-sub', { opacity: 0, duration: 0.6 }, 1)
-        .fromTo('.hero-line-1', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1 }, 1.2)
+      // 2 — Intro clears out completely (eyebrow + wordmark + sub leave the
+      //     stage), then the first message fades up alone.
+      tl.to('.hero-eyebrow', { opacity: 0, y: -24, duration: 0.5 }, 1)
+        .to('.hero-word', { yPercent: -140, scale: 0.55, opacity: 0, duration: 1 }, 1)
+        .to('.hero-sub', { opacity: 0, y: -20, duration: 0.4 }, 1)
         .fromTo(
           '.hero-shot',
           { opacity: 0, scale: 0.8, y: 60 },
           { opacity: 1, scale: 1, y: 0, stagger: 0.15, duration: 1.2 },
-          1
+          1.1
         )
+        .fromTo('.hero-line-1', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9 }, 1.8)
 
-      // 3 — Deeper: photos parallax apart, second line
-      tl.to('.hero-shot-a', { xPercent: -30, yPercent: -14, duration: 1.6 }, 2.2)
-        .to('.hero-shot-b', { xPercent: 34, yPercent: 12, duration: 1.6 }, 2.2)
-        .to('.hero-shot-c', { xPercent: -40, yPercent: 20, duration: 1.6 }, 2.2)
-        .to('.hero-shot-d', { xPercent: 42, yPercent: -18, duration: 1.6 }, 2.2)
-        .to('.hero-line-1', { opacity: 0, y: -30, duration: 0.8 }, 2.2)
-        .fromTo('.hero-line-2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1 }, 2.5)
+      // 3 — Message 1 leaves FULLY before message 2 arrives; photos parallax
+      tl.to('.hero-shot-a', { xPercent: -30, yPercent: -14, duration: 1.6 }, 2.9)
+        .to('.hero-shot-b', { xPercent: 34, yPercent: 12, duration: 1.6 }, 2.9)
+        .to('.hero-shot-c', { xPercent: -40, yPercent: 20, duration: 1.6 }, 2.9)
+        .to('.hero-shot-d', { xPercent: 42, yPercent: -18, duration: 1.6 }, 2.9)
+        .to('.hero-line-1', { opacity: 0, y: -34, duration: 0.6 }, 2.9)
+        .fromTo('.hero-line-2', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9 }, 3.7)
 
-      // 4 — Arrive: everything settles behind the tagline + CTA
-      tl.to('.hero-shot', { opacity: 0.25, filter: 'blur(6px)', duration: 1.2 }, 3.6)
-        .to('.hero-line-2', { opacity: 0, y: -30, duration: 0.8 }, 3.6)
-        .to('.hero-cine', { scale: 1.08, duration: 1.4 }, 3.6)
-        .to('.hero-veil', { opacity: 0.72, duration: 1 }, 3.6)
-        .fromTo('.hero-final', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2 }, 3.9)
+      // 4 — Message 2 leaves, then the tagline + CTA arrive on a clean stage
+      tl.to('.hero-shot', { opacity: 0.22, filter: 'blur(6px)', duration: 1.2 }, 4.7)
+        .to('.hero-line-2', { opacity: 0, y: -34, duration: 0.6 }, 4.7)
+        .to('.hero-cine', { scale: 1.08, duration: 1.4 }, 4.7)
+        .to('.hero-veil', { opacity: 0.72, duration: 1 }, 4.7)
+        .fromTo('.hero-final', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.1 }, 5.5)
     }, rootRef)
 
     return () => ctx.revert()
@@ -135,7 +137,7 @@ export default function HeroScene() {
 
         {/* Centered content stack */}
         <div className="relative z-10 flex flex-col items-center px-6 text-center">
-          <p className="eyebrow mb-6 opacity-80">Abu Dhabi · Est. 2025</p>
+          <p className="hero-eyebrow eyebrow mb-6 opacity-80">Abu Dhabi · Est. 2025</p>
 
           <h1 className="hero-word font-sans text-5xl font-600 tracking-[0.25em] text-cream sm:text-7xl md:text-8xl">
             NURAKI
@@ -155,30 +157,30 @@ export default function HeroScene() {
               </div>
             </div>
           )}
-
-          {/* Scroll-driven lines + final CTA (animated path only) */}
-          {!reduce && (
-            <>
-              <div className="pointer-events-none absolute left-1/2 top-1/2 w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2">
-                <p className="hero-line-1 font-serif text-3xl italic text-cream opacity-0 sm:text-5xl">
-                  Bespoke nail artistry
-                </p>
-                <p className="hero-line-2 font-serif text-3xl italic text-cream opacity-0 sm:text-5xl">
-                  in the heart of Abu Dhabi
-                </p>
-              </div>
-
-              <div className="hero-final absolute left-1/2 top-1/2 flex w-[90vw] max-w-xl -translate-x-1/2 -translate-y-1/2 flex-col items-center opacity-0">
-                <p className="text-shimmer font-serif text-4xl italic sm:text-6xl">{site.tagline}</p>
-                <p className="mt-6 max-w-md text-sm leading-relaxed text-cream-dim">{site.intro}</p>
-                <div className="pointer-events-auto mt-9 flex flex-wrap items-center justify-center gap-4">
-                  <a href="#book" className="btn-gold">Book Your Escape</a>
-                  <a href="#gallery" className="btn-ghost">View Gallery</a>
-                </div>
-              </div>
-            </>
-          )}
         </div>
+
+        {/* Scroll-driven messages + final CTA (animated path only).
+            Grid-stacked so every message occupies the SAME centred cell and we
+            hard-crossfade one at a time — never two strings layered on top of
+            each other. GSAP animates only opacity/y, so centring never breaks. */}
+        {!reduce && (
+          <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center px-6 text-center">
+            <p className="hero-line-1 [grid-area:1/1] font-serif text-3xl italic text-cream opacity-0 sm:text-5xl">
+              Bespoke nail artistry
+            </p>
+            <p className="hero-line-2 [grid-area:1/1] font-serif text-3xl italic text-cream opacity-0 sm:text-5xl">
+              in the heart of Abu Dhabi
+            </p>
+            <div className="hero-final [grid-area:1/1] flex w-[90vw] max-w-xl flex-col items-center opacity-0">
+              <p className="text-shimmer font-serif text-4xl italic sm:text-6xl">{site.tagline}</p>
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-cream-dim">{site.intro}</p>
+              <div className="pointer-events-auto mt-9 flex flex-wrap items-center justify-center gap-4">
+                <a href="#book" className="btn-gold">Book Your Escape</a>
+                <a href="#gallery" className="btn-ghost">View Gallery</a>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Scroll cue */}
         <div className="hero-cue absolute bottom-8 left-1/2 -translate-x-1/2 text-center">

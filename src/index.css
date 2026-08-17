@@ -33,6 +33,12 @@
     font-weight: 400;
   }
 
+  /* Fixed-header offset so anchored section headings clear the top bar
+     instead of being clipped underneath it when scrolled to. */
+  main > section[id] {
+    scroll-margin-top: 6rem;
+  }
+
   ::selection {
     background: theme('colors.gold');
     color: theme('colors.ink');

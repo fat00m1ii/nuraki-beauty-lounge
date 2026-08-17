@@ -142,7 +142,7 @@ export default function Booking() {
   }
 
   return (
-    <section id="book" className="relative z-10 bg-ink-soft px-5 py-24 sm:px-8 sm:py-32">
+    <section id="book" className="relative z-10 bg-ink-soft px-5 py-24 sm:px-8 sm:py-32 lg:pl-[210px]">
       <div className="mx-auto max-w-3xl">
         <div className="reveal mb-12 text-center">
           <p className="eyebrow">Reservations</p>
